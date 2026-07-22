@@ -1,9 +1,23 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
+import CitySelector from "@/components/CitySelector";
+import WeatherDashboard from "@/components/WeatherDashboard";
 
 export default function Home() {
+  let [geocode, setGeocode] = useState(null);
+
+  useEffect(() => {
+    let lastGeocode = localStorage.getItem("geocode");
+    lastGeocode && setGeocode(JSON.parse(lastGeocode));
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans ">
-      Test
+    <div>
+      {geocode ? (
+        <WeatherDashboard geocode={geocode} />
+      ) : (
+        <CitySelector setGeocode={setGeocode} />
+      )}
     </div>
   );
 }
