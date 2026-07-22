@@ -1,20 +1,20 @@
 # Next Weather App ⛅
 
-Just a simple warter, a simple web built using REACT with the Nextjs framework for a purely educational purpose and trying to apply the basic concepts of React and Next.
+A simple weather web app built using React with the Next.js framework for purely educational purposes, applying the core concepts of React and Next.js
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- JS
+- JavaScript
 - React.js
 - Next.js
 - Tailwind CSS
 
-## APIs
+## 🌐 APIs
 
-I used some free APIs provided by [open-meteo.com](https://open-meteo.com/)
-If you want to use it too This is there [documentation](https://open-meteo.com/en/docs)
+I used the free weather APIs provided by [Open-Meteo](https://open-meteo.com/)
+If you want to use them too, check out their [documentation](https://open-meteo.com/en/docs)
 
-## How to work on It
+## 🚀 How to Run It
 
 1. **Clone the project files to your machine:**
 
@@ -22,13 +22,13 @@ If you want to use it too This is there [documentation](https://open-meteo.com/e
 git clone https://github.com/al-jbri/next-weather-app/
 ```
 
-2. **Go to the project folder and run:**
+2. **Go to the project folder and install dependencies:**
 
 ```bash
 npm install
 npm run dev
 ```
 
-3. **Open in in new tab on your browser:** `http://localhost:3000/`
+3. **Open it in your browser:**`http://localhost:3000/`
 
-thanks
+Thanks!
