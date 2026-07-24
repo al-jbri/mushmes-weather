@@ -4,17 +4,18 @@ import CitySelector from "@/components/CitySelector";
 import WeatherDashboard from "@/components/WeatherDashboard";
 
 export default function Home() {
-  let [geocode, setGeocode] = useState(() => {
-    try {
-      let lastGeocode = localStorage.getItem("geocode");
+  const [geocode, setGeocode] = useState(null);
 
+  useEffect(() => {
+    try {
+      const lastGeocode = localStorage.getItem("geocode");
       if (lastGeocode) {
-        return JSON.parse(lastGeocode);
+        setGeocode(JSON.parse(lastGeocode));
       }
     } catch {
-      return null;
+      setGeocode(null);
     }
-  });
+  }, []);
 
   return (
     <div>

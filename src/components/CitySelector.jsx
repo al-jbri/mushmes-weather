@@ -20,15 +20,16 @@ export default function CitySelector({ setGeocode }) {
     !data.results && toast.error("City not found, try another name!");
 
     // save data
-
     const geocodeData = {
       name: data.results[0].name,
+      country: data.results[0].country,
       latitude: data.results[0].latitude,
       longitude: data.results[0].longitude,
     };
 
     window.localStorage.setItem("geocode", JSON.stringify(geocodeData));
     setGeocode(localStorage.getItem("geocode"));
+    toast.success("The city was successfully set.");
   };
 
   return (
