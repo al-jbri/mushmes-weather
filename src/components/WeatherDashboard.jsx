@@ -1,3 +1,3 @@
-export default function WeatherDashboard({ geocode }) {
+export default function WeatherDashboard({ data }) {
   return <div>"yes"</div>;
 }

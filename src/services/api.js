@@ -1,6 +1,6 @@
 async function getGeocodefromCity(city) {
   try {
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`;
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&format=json`;
     const res = await fetch(url);
     return await res.json();
   } catch {
@@ -8,7 +8,7 @@ async function getGeocodefromCity(city) {
   }
 }
 
-async function getWeather(latitude, longitude) {
+async function getWeather({ latitude, longitude }) {
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
     const res = await fetch(url);
