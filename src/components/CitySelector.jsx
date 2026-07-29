@@ -1,46 +1,52 @@
 "use client";
 
 import { getGeocodefromCity } from "@/services/api.js";
-import toast from "react-hot-toast";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
-export default function CitySelector({ setGeocode }) {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const cityName = e.target.elements.cityInput.value;
+export default function CitySelector() {
+  const router = useRouter();
+  const [searchResult, setSearchResult] = useState([]);
+  const lastTimer = useRef(null);
 
-    // check input
-    if (!cityName.trim()) {
-      toast.error("Please enter a city name");
+  function handleSearch(e) {
+    const value = e.target.value.trim();
+    lastTimer.current && clearTimeout(lastTimer.current);
+
+    if (value.length < 2) {
+      setSearchResult([]);
       return;
     }
-
-    // fetch and check data
-    const data = await getGeocodefromCity(cityName);
-    !data && toast.error("Failure to contact the server");
-    !data.results && toast.error("City not found, try another name!");
-
-    // save data
-    const geocodeData = {
-      name: data.results[0].name,
-      country: data.results[0].country,
-      latitude: data.results[0].latitude,
-      longitude: data.results[0].longitude,
-    };
-
-    window.localStorage.setItem("geocode", JSON.stringify(geocodeData));
-    setGeocode(localStorage.getItem("geocode"));
-    toast.success("The city was successfully set.");
-  };
+    lastTimer.current = setTimeout(async () => {
+      const data = await getGeocodefromCity(value);
+      setSearchResult(data?.results || []);
+    }, 500);
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="cityInput">City Name</label>
-      <input
-        type="text"
-        name="cityInput"
-        id="cityInput"
-        placeholder="search for city name..."
-      />
-    </form>
+    <div>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="cityInput">City Name</label>
+        <input
+          type="text"
+          name="cityInput"
+          id="cityInput"
+          placeholder="search for city name..."
+          onChange={handleSearch}
+        />
+
+        <ul>
+          {searchResult.map((c) => (
+            <li
+              key={c.id}
+              onClick={() => router.push(`/city/${c.name}`)}
+              className="cursor-pointer p-2 hover:bg-gray-100"
+            >
+              <span>{`${c.name}/${c.admin1 && `${c.admin1}`}/${c.country}`}</span>
+            </li>
+          ))}
+        </ul>
+      </form>
+    </div>
   );
 }
