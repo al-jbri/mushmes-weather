@@ -1,6 +1,6 @@
 "use client";
 
-import { getGeocodefromCity } from "@/services/api.js";
+import { getGeocodeFromCity } from "@/services/api.js";
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
@@ -17,8 +17,9 @@ export default function CitySelector() {
       setSearchResult([]);
       return;
     }
+
     lastTimer.current = setTimeout(async () => {
-      const data = await getGeocodefromCity(value);
+      const data = await getGeocodeFromCity(value);
       setSearchResult(data?.results || []);
     }, 500);
   }
@@ -50,3 +51,9 @@ export default function CitySelector() {
     </div>
   );
 }
+
+// TODOs :-
+//  [  ] - make the CitySelector return (lat, long) not name, I've got that now :).
+//  [  ] - make the city/[city]/page.jsx Receive it and passes it to the <WeatherDashboard>.
+//  [  ] - make the <WeatherDashboard> Receive it also.
+//  [  ] - IDK

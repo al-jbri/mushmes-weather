@@ -1,4 +1,4 @@
-async function getGeocodefromCity(city) {
+async function getGeocodeFromCity(city) {
   try {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&format=json`;
     const res = await fetch(url);
@@ -18,4 +18,4 @@ async function getWeather({ latitude, longitude }) {
   }
 }
 
-export { getGeocodefromCity, getWeather };
+export { getGeocodeFromCity, getWeather };
