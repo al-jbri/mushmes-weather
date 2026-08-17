@@ -21,6 +21,7 @@ export default function CitySelector() {
     lastTimer.current = setTimeout(async () => {
       const data = await getGeocodeFromCity(value);
       setSearchResult(data?.results || []);
+      console.log(data.results);
     }, 500);
   }
 
@@ -32,18 +33,23 @@ export default function CitySelector() {
           type="text"
           name="cityInput"
           id="cityInput"
-          placeholder="search for city name..."
+          placeholder="Search for a city... (e.g. Aden, Cairo, Riyadh)"
           onChange={handleSearch}
+          className="w-xl"
         />
 
         <ul>
           {searchResult.map((c) => (
             <li
               key={c.id}
-              onClick={() => router.push(`/city/${c.name}`)}
               className="cursor-pointer p-2 hover:bg-gray-100"
+              onClick={() =>
+                router.push(
+                  `/city/${c.name}?lon=${c.longitude}&lat=${c.latitude}`,
+                )
+              }
             >
-              <span>{`${c.name}/${c.admin1 && `${c.admin1}`}/${c.country}`}</span>
+              <span>{`${c.name}, ${c.admin1 && c.admin1 !== c.name ? `${c.admin1}, ` : ""}${c.country}`}</span>
             </li>
           ))}
         </ul>
@@ -52,8 +58,4 @@ export default function CitySelector() {
   );
 }
 
-// TODOs :-
-//  [  ] - make the CitySelector return (lat, long) not name, I've got that now :).
-//  [  ] - make the city/[city]/page.jsx Receive it and passes it to the <WeatherDashboard>.
-//  [  ] - make the <WeatherDashboard> Receive it also.
-//  [  ] - IDK
+/* <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600" />  */
