@@ -12,7 +12,7 @@ A simple weather web app built using React with the Next.js framework for purely
 ## 🌐 APIs
 
 I used the free weather APIs provided by [Open-Meteo](https://open-meteo.com/)
-If you want to use them too, check out their [documentation](https://open-meteo.com/en/docs)
+If you want to use them too, check out their [documentation here](https://open-meteo.com/en/docs)
 
 ## 🚀 How to Run It
 

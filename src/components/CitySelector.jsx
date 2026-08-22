@@ -3,12 +3,14 @@
 import { getCity } from "@/services/api.js";
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function CitySelector() {
   const router = useRouter();
   const [searchResult, setSearchResult] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const lastTimer = useRef(null);
+  const abortContoler = useRef(null);
 
   return (
     <search>
@@ -69,14 +71,22 @@ export default function CitySelector() {
     lastTimer.current && clearTimeout(lastTimer.current);
     setSearchResult(null);
     setLoading(true);
-
+    abortContoler.current?.abort();
+    abortContoler.current = new AbortController();
     if (value.length <= 1) {
       setLoading(false);
       return;
     }
 
     lastTimer.current = setTimeout(async () => {
-      const data = await getCity(value);
+      const data = await getCity(value, abortContoler.current.signal);
+      if (data === "ABORTED") {
+        return;
+      }
+      if (data === null) {
+        toast.error("Unable to find the city. Check your internet connection.");
+      }
+
       setSearchResult(data?.results || []);
       setLoading(false);
     }, 500);
