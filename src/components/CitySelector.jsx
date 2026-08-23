@@ -71,24 +71,31 @@ export default function CitySelector() {
     lastTimer.current && clearTimeout(lastTimer.current);
     setSearchResult(null);
     setLoading(true);
+
+    // abort conroller
     abortContoler.current?.abort();
     abortContoler.current = new AbortController();
+
     if (value.length <= 1) {
       setLoading(false);
       return;
     }
 
     lastTimer.current = setTimeout(async () => {
-      const data = await getCity(value, abortContoler.current.signal);
-      if (data === "ABORTED") {
-        return;
+      try {
+        const data = await getCity(value, abortContoler.current.signal);
+        setSearchResult(data?.results || []);
+      } catch (err) {
+        if (err.name === "AbortError") {
+          return;
+        } else {
+          toast.error(
+            "Unable to find the city. Check your internet connection.",
+          );
+        }
+      } finally {
+        setLoading(false);
       }
-      if (data === null) {
-        toast.error("Unable to find the city. Check your internet connection.");
-      }
-
-      setSearchResult(data?.results || []);
-      setLoading(false);
     }, 500);
   }
 }
