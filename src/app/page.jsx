@@ -1,6 +1,4 @@
 import CitySelector from "@/components/CitySelector";
-import Footer from "@/components/Footer";
-
 export default function Home() {
   return (
     <div>
