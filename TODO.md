@@ -5,6 +5,8 @@
 - [x] Pass data to `<WeatherDashboard>`
 - [x] make the "there is not any results" when there is not cities
 - [x] make the spinner when is srearching for city
+- [x] finish <Footer />
+- [ ] finish <Navbar/>
 - [ ] Get the weather from the <weatherDashboard />, Show them in principle
 - [ ] make the city/[city] save data in localstorage
 - [ ] show them in recent viewd in @/page.jsx

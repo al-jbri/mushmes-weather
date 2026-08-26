@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function CitySelector() {
+export default function CitySelector({ className = "" }) {
   const router = useRouter();
   const [searchResult, setSearchResult] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export default function CitySelector() {
   const abortContoler = useRef(null);
 
   return (
-    <search>
+    <search className={className}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="cityInput">City Name</label>
         <input
@@ -67,6 +67,7 @@ export default function CitySelector() {
   }
 
   function handleSearch(e) {
+    // init
     const value = e.target.value.trim();
     lastTimer.current && clearTimeout(lastTimer.current);
     setSearchResult(null);
@@ -76,6 +77,7 @@ export default function CitySelector() {
     abortContoler.current?.abort();
     abortContoler.current = new AbortController();
 
+    // validating
     if (value.length <= 1) {
       setLoading(false);
       return;

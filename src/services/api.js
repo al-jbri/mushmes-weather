@@ -4,9 +4,10 @@ async function getCity(city, signal) {
   if (!res.ok) throw new Error("Fetch failed");
   return await res.json();
 }
-async function getWeather({ latitude, longitude }) {
+
+async function getWeather({ lat, lon }) {
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
     const res = await fetch(url);
     return res.ok ? await res.json() : null;
   } catch {
