@@ -7,9 +7,11 @@
 - [x] make the spinner when is srearching for city
 - [x] finish <Footer />
 - [x] finish <Navbar/>
-- [ ] Get the weather from the <weatherDashboard />, Show them in principle
-- [ ] make the city/[city] save data in localstorage
+- [x] Get the weather from the <weatherDashboard />, Show them in principle
+- [x] make the city/[city] save data in localstorage
 - [ ] show them in recent viewd in @/page.jsx
 - [ ] style the @/page.jsx + <citySelector />
 - [ ] style the <weatherDashboard />
+- [ ] adding dark/light switch Away from the system preferences
+- [ ] make the multi-language (arabic specifically)
 - [ ] adding an error handling basic system show the error and two buttons, one for refresh and one redirect to "/" if the url was wrong or Damaged Data
