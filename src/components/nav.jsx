@@ -8,11 +8,13 @@ export default function Navbar() {
       </Link>
 
       <div className="flex items-center gap-3">
-        <button className="px-2 py-1 rounded-xl hover:bg-amber-200 hover:text-stone-950 text-xs font-semibold">
+        <button className="px-2 py-1 rounded-xl hover:bg-amber-200 hover:text-stone-950 cursor-pointer">
           العربية
         </button>
 
-        <button className="p-1 rounded-xl hover:bg-amber-200 ">🌙</button>
+        <button className="p-1 rounded-xl hover:bg-amber-200 cursor-pointer">
+          🌙
+        </button>
       </div>
     </nav>
   );
